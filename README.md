@@ -130,6 +130,8 @@ The following assumptions were used during development:
 
 All features requested in the assessment have been successfully implemented.
 
+![alt text](image.png)
+
 # Pendekatan Implementasi
 
 ## Bagaimana fitur ini diimplementasikan di Salesforce
