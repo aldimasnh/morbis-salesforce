@@ -1,58 +1,174 @@
-# Salesforce DX Project
+# Prospect Manager - Salesforce Technical Assessment
 
-Salesforce DX is a development approach that brings source-driven development, team collaboration, and continuous integration to the Salesforce Platform. Instead of working directly in an org through a web browser, you work with metadata as source files in a local DX project, track changes in version control, and deploy through automated processes.
+## Overview
 
-This project template gets you started with the tools and structure you need to build Salesforce applications using source control, scratch orgs, and the Salesforce CLI.
+Prospect Manager is a simple Salesforce application built using **Lightning Web Components (LWC)** and **Apex** to help the Sales team manage prospective customers.
 
-## Prerequisites
+The application allows users to:
 
-Before you start, make sure you have:
+- Add new prospects
+- View a list of prospects
+- View prospect details
+- Mark a prospect as **Qualified**
+- Automatically record the date and time when a prospect becomes **Qualified**
 
-- **Salesforce CLI** - Download from [developer.salesforce.com/tools/salesforcecli](https://developer.salesforce.com/tools/salesforcecli). See [Install Salesforce CLI](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_install_cli.htm) for details.
-- **VS Code with Salesforce Extension Pack** - See [Installation Instructions](https://developer.salesforce.com/docs/platform/sfvscode-extensions/guide/install.html) for details. Includes the Agentforce Vibes extension.
-- **A development org** - Sign up for a free Developer Edition org [here](https://developer.salesforce.com/signup).
-- **Dev Hub enabled** (optional, required to create scratch orgs) - You can enable Dev Hub in your development org under Setup > Dev Hub.  See [Provide Developers Access to Salesforce DX Tools](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_setup_dx_tools.htm).
+---
+
+## Features
+
+- ✅ Create Prospect
+- ✅ View Prospect List
+- ✅ View Prospect Detail
+- ✅ Mark Prospect as Qualified
+- ✅ Automatically save Qualified Date & Time
+- ✅ Toast notification after successful actions
+- ✅ Automatically refresh list and detail after update
+
+---
+
+## Tech Stack
+
+- Salesforce Developer Edition
+- Apex
+- Lightning Web Components (LWC)
+- Salesforce Lightning Experience
+- Salesforce CLI
+- VS Code + Salesforce Extension Pack
+
+---
+
+## How to Run
+
+### 1. Clone the repository
+
+```bash
+git clone <repository-url>
+cd <project-folder>
+```
+
+### 2. Login to your Salesforce Developer Org
+
+```bash
+sf org login web
+```
+
+Follow the browser authentication process.
+
+---
+
+### 3. Deploy metadata
+
+```bash
+sf project deploy start
+```
+
+---
+
+### 4. Open Salesforce
+
+```bash
+sf org open
+```
+
+---
+
+### 5. Open the application
+
+Open the **Prospect Manager** Lightning App Page that has been created in Lightning App Builder.
+
+---
 
 ## Project Structure
 
-Your DX project follows this structure:
+```
+force-app/
+└── main/
+    └── default/
+        ├── classes/
+        │   └── ProspectController.cls
+        │
+        ├── lwc/
+        │   └── prospectManager/
+        │       ├── prospectManager.html
+        │       ├── prospectManager.js
+        │       └── prospectManager.js-meta.xml
+        │
+        ├── objects/
+        │   └── Prospect__c/
+```
 
-- **`force-app/main/default/`** - Your metadata source files live in this default package directory. You can configure additional package directories in the `sfdx-project.json` file.
-- **`config/`** - Scratch org definitions and project settings
-- **`scripts/`** - Automation scripts for common tasks
-- **`sfdx-project.json`** - Project manifest that defines package directories, namespace, API version, and other project-level settings
+### Folder Description
 
-See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm).
+| Folder | Description |
+|---------|-------------|
+| classes | Apex controller containing business logic |
+| lwc | Lightning Web Component for UI |
+| objects | Custom Object and Custom Fields |
 
-## Get Started
+---
 
-Ready to start developing? The [Get Started with Salesforce DX](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_get_started_dx.htm) guide walks you through your first project, from creating a scratch org to creating a simple Apex class or LWC to deploying your code to a sandbox.
+## Assumptions
 
-## Common Salesforce CLI Commands
+The following assumptions were used during development:
 
-Here are common CLI commands that you'll use the most:
+- The application runs on a Salesforce Developer Edition org.
+- Prospect data is stored in a custom object named `Prospect__c`.
+- Prospect status consists of:
+  - New
+  - Contacted
+  - Qualified
+- New prospects are created with the default status **New**.
+- When **Mark as Qualified** is clicked:
+  - Status is updated to **Qualified**
+  - `Qualified_Date__c` is automatically filled using `System.now()`
+- The Qualified button is only shown when the selected prospect has not yet been qualified.
+- Email validation uses the standard `lightning-input` component with `type="email"`.
 
-- `sf org login web`: Authorize an org
-- `sf org open`: Open your org in a browser
-- `sf org create scratch`: Create a scratch org
-- `sf project deploy start`: Deploy metadata to your org
-- `sf project retrieve start`: Retrieve metadata from your org
-- `sf template generate <artifact>`: Scaffold new components, such as Apex classes and triggers, LWC components, Lightning apps, and more
-- `sf apex <command>`: Run Apex tests, run anonymous Apex blocks, and view logs
-- `sf data <command>`: Work with test data
-- `sf alias <command>`: Manage org aliases
-- `sf config <command>`: Configure CLI settings
+---
 
-## Use Agentforce Vibes to Build Lightning Apps
+## Things Not Yet Implemented
 
-Transform your ideas into custom Lightning apps that extend CRM workflows directly in Lightning Experience. Through natural conversations with Agentforce Vibes, implement custom objects and fields, complex business logic, and dynamic UI components. See [Build a Lightning App Using Agentforce Vibes](https://developer.salesforce.com/docs/platform/einstein-for-devs/guide/lexapp-overview.html).
+All features requested in the assessment have been successfully implemented.
 
-## Additional Resources
+# Pendekatan Implementasi
 
-- [Agentforce Vibes Developer Guide](https://developer.salesforce.com/docs/platform/einstein-for-devs/guide/einstein-overview.html)
-- [Salesforce CLI Installation Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/)
-- [Salesforce CLI Plugin Development Guide](https://developer.salesforce.com/docs/platform/salesforce-cli-plugin/guide/conceptual-overview.html)
-- [Salesforce VS Code Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
+## Bagaimana fitur ini diimplementasikan di Salesforce
 
+Fitur ini diimplementasikan dengan menggabungkan fitur deklaratif Salesforce dan pengembangan menggunakan kode. Data calon pelanggan disimpan pada Custom Object `Prospect__c`, sedangkan antarmuka pengguna dibuat menggunakan Lightning Web Components (LWC). Proses seperti menambahkan data, menampilkan daftar, melihat detail, dan mengubah status menjadi **Qualified** ditangani melalui Apex.
+
+---
+
+## Bagian yang dapat dibuat menggunakan konfigurasi (Declarative)
+
+Beberapa bagian dapat dibuat tanpa menulis kode, di antaranya:
+
+- Membuat **Custom Object** `Prospect__c`.
+- Membuat field seperti **Company**, **Email**, **Status**, dan **Qualified Date**.
+- Membuat nilai **Picklist** untuk Status (`New`, `Contacted`, `Qualified`).
+- Membuat **Lightning App Page** menggunakan Lightning App Builder.
+- Mengatur **Page Layout**, Field Level Security, dan hak akses pengguna.
+
+---
+
+## Bagian yang memerlukan kode
+
+Beberapa kebutuhan lebih sesuai dibuat menggunakan kode, yaitu:
+
+- Membuat tampilan form dan daftar calon pelanggan.
+- Menambahkan data calon pelanggan melalui form.
+- Menampilkan detail calon pelanggan.
+- Menjalankan proses **Mark as Qualified**.
+- Mengubah status menjadi **Qualified** sekaligus menyimpan tanggal dan waktu saat status tersebut berubah.
+- Memperbarui data pada halaman secara otomatis setelah terjadi perubahan.
+
+---
+
+## Teknologi Salesforce yang digunakan
+
+| Teknologi | Alasan |
+|-----------|--------|
+| **Lightning Web Components (LWC)** | Digunakan untuk membangun antarmuka pengguna yang interaktif dan responsif. |
+| **Apex** | Digunakan untuk menangani logika bisnis dan proses CRUD ke Salesforce. |
+| **Custom Object** | Digunakan untuk menyimpan data calon pelanggan. |
+| **Lightning App Builder** | Digunakan untuk menampilkan komponen LWC pada halaman Salesforce. |
+| **SLDS (Salesforce Lightning Design System)** | Digunakan agar tampilan aplikasi mengikuti standar desain Salesforce. |
