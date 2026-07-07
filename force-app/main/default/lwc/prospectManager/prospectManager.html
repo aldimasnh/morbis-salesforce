@@ -1,0 +1,95 @@
+<template>
+
+    <lightning-card title="Prospect Manager">
+
+        <div class="slds-p-around_medium">
+
+             <lightning-input
+                label="Name"
+                value={name}
+                onchange={handleNameChange}>
+            </lightning-input>
+
+            <lightning-input
+                label="Company"
+                value={company}
+                onchange={handleCompanyChange}>
+            </lightning-input>
+
+            <lightning-input
+                type="email"
+                label="Email"
+                value={email}
+                onchange={handleEmailChange}>
+            </lightning-input>
+
+            <br/>
+
+            <lightning-button
+                label="Save"
+                variant="brand"
+                onclick={handleSave}>
+            </lightning-button>
+
+            <hr class="slds-m-vertical_medium"/>
+
+            <lightning-datatable
+                key-field="Id"
+                data={prospects}
+                columns={columns}
+                onrowselection={handleRowSelection}
+                max-row-selection="1">
+            </lightning-datatable>
+
+            <hr class="slds-m-vertical_medium"/>
+
+            <template lwc:if={selectedProspect}>
+
+                <lightning-card title="Prospect Detail">
+
+                    <div class="slds-p-around_medium">
+
+                        <p><strong>Name:</strong> {selectedProspect.Name}</p>
+
+                        <p><strong>Company:</strong> {selectedProspect.Company__c}</p>
+
+                        <p><strong>Email:</strong> {selectedProspect.Email__c}</p>
+
+                        <p><strong>Status:</strong> {selectedProspect.Status__c}</p>
+
+                        <p>
+                            <strong>Qualified Date: </strong>
+
+                            <lightning-formatted-date-time
+                                value={selectedProspect.Qualified_Date__c}
+                                year="numeric"
+                                month="2-digit"
+                                day="2-digit"
+                                hour="2-digit"
+                                minute="2-digit">
+                            </lightning-formatted-date-time>
+                        </p>
+
+                    </div>
+
+                    <template lwc:if={canMarkQualified}>
+
+                        <br/>
+
+                        <lightning-button
+                            label="Mark as Qualified"
+                            variant="success"
+                            onclick={handleMarkAsQualified}>
+                        </lightning-button>
+
+                    </template>
+
+                </lightning-card>
+
+            </template>
+
+        </div>
+
+    </lightning-card>
+
+</template>
